@@ -1,17 +1,17 @@
-import trendingActionTypes from './actionTypes';
+import searchActionTypes from './actionTypes';
 import api from '../../http'
 
 
 function requestDataLoading(loading) {
     return {
-        type: trendingActionTypes.REQUEST_DATA_LOADING,
+        type: searchActionTypes.REQUEST_DATA_LOADING,
         loading: loading,
     }
 }
 
 function requestDataSuccess(data, loading) {
     return {
-        type: trendingActionTypes.REQUEST_DATA_SUCCESS,
+        type: searchActionTypes.REQUEST_DATA_SUCCESS,
         data: data,
         loading: loading,
     }
@@ -19,18 +19,18 @@ function requestDataSuccess(data, loading) {
 
 function requestDataError(error,loading) {
     return {
-        type: trendingActionTypes.REQUEST_DATA_ERROR,
+        type: searchActionTypes.REQUEST_DATA_ERROR,
         error:error,
         loading:loading,
     }
 }
 
-export function fetchTrendingData() {
+export function fetchSearchData(value) {
     return (dispatch) => {
         dispatch(requestDataLoading(true));
 
         setTimeout(() => {
-            api.trending()
+            api.search(value)
                 .then(res => res.json())
                 .then(({ data }) => {
                     console.log(data)
@@ -40,6 +40,6 @@ export function fetchTrendingData() {
                     console.error(e.message);
                     dispatch(requestDataError('Something Wrong! Check yout url adress.', false))
                 })
-        }, 1000)
+        }, 3000)
     }
 }

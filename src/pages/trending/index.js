@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
-import { connect, useSelector, shallowEqual, useDispatch } from 'react-redux';
-import { requestDataLoading, fetchData } from '../../redux/trending/actions';
+import { useSelector, shallowEqual, useDispatch } from 'react-redux';
+import { fetchTrendingData } from '../../redux/trending/actions';
+
+import Card from '../../components/Card'
 // class TrendingPage extends React.Component {
 //     render() {
 //         console.log(this.props.trending);
@@ -21,8 +23,8 @@ const TrendingPage = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(fetchData());
-    }, [])
+        dispatch(fetchTrendingData());
+    }, [dispatch])
 
     if (loading) {
         return <div>loading ...</div>
@@ -35,16 +37,12 @@ const TrendingPage = () => {
 
     return (
         <>
-            <ul>
+            <ul className='row wrap'>
                 {data.map((item) =>
-                    <li key={item.id}>
-                        {item.title}
-                    </li>
+                    <Card key={item.id} item={item}/>
                 )}
             </ul>
         </>
-
-
     )
 }
 

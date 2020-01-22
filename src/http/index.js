@@ -1,10 +1,10 @@
-import axios from 'axios';
+// import axios from 'axios';
 
 // const RANDOM_URL = 'https://api.giphy.com/v1/gifs/random?';
 const TRENDING_URL = 'http://api.giphy.com/v1/gifs/trending?';
-// const SEARCH_URL = 'http://api.giphy.com/v1/gifs/search?q=';
+const SEARCH_URL = 'http://api.giphy.com/v1/gifs/search?q=';
 const API_KEY = '3whiADS5q2I87ugJpVmZqjPraaI11u5a';
-const limitValue = 6;
+const limitValue = 12;
 
 const api = {
     trending: () => {
@@ -22,21 +22,26 @@ const api = {
         //     return error.message;
         // }) 
         // .finally(()=> console.log('request is finished'))
+        // trending: async () => {
+        //     try{
+        //         const response = await axios({
+        //             method: 'GET',
+        //             url: `${TRENDING_URL}api_key=${API_KEY}&limit=${limitValue}`,
+        //             responseType: 'json',
+        //         })
+        //         console.log(response);
+        //         return response;
+        //     } catch( error ) {
+        //         console.error(error);
+        //         return error.message;
+        //     }
+        // }
+    },
+
+    search: (searchValue) => {
+        return fetch(`${SEARCH_URL}${searchValue}&api_key=${API_KEY}&limit=${limitValue}`)
     }
-    // trending: async () => {
-    //     try{
-    //         const response = await axios({
-    //             method: 'GET',
-    //             url: `${TRENDING_URL}api_key=${API_KEY}&limit=${limitValue}`,
-    //             responseType: 'json',
-    //         })
-    //         console.log(response);
-    //         return response;
-    //     } catch( error ) {
-    //         console.error(error);
-    //         return error.message;
-    //     }
-    // }
+
 }
 
 export default api;

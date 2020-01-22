@@ -1,17 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import './index.scss';
 import { Provider as ReduxProvider } from 'react-redux';
 
 import configureStore from './redux/configureSrote';
-import TrendingPage from './pages/trending'
+import AppRouter from './routing'
 
 const store = configureStore();
 
 ReactDOM.render(
     <>
         <ReduxProvider store={store}>
-            <TrendingPage />
+            <AppRouter />
         </ReduxProvider>
     </>,
     document.getElementById('root')
